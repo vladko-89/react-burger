@@ -1,0 +1,13 @@
+.App {
+}
+
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.main__container {
+  display: flex;
+}
+

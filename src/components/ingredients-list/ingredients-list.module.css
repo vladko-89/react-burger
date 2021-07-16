@@ -1,0 +1,11 @@
+.ingredients__list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 32px;
+
+  list-style: none;
+}
