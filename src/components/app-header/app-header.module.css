@@ -1,0 +1,27 @@
+.header {
+  margin: 0 auto;
+  max-width: 1920px;
+
+  background-color: #1c1c21;
+
+  border: 2px solid --colors-interface-accent;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  list-style: none;
+}
+
+.menu__link {
+  display: flex;
+}

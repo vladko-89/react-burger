@@ -1,0 +1,21 @@
+.ingredients {
+  max-width: 600px;
+  
+}
+
+.ingredients__groups {
+  margin: 0;
+  padding: 0;
+  max-height: 95vh;
+
+  list-style: none;
+  overflow-y: scroll;
+}
+
+.ingredients__groups::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2f2f37;
+}
+.ingredients__groups::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}

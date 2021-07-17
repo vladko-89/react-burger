@@ -1,0 +1,16 @@
+.button {
+  display: flex;
+}
+
+.button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.button__text {
+  color: rgba(133, 133, 173, 1);
+}
+
+.button__text_active {
+  color: white;
+}
