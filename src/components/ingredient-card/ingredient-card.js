@@ -19,9 +19,9 @@ const IngredientCard = ({card}) => {
 }
 
 IngredientCard.propTypes = {
-  card: PropTypes.arrayOf(PropTypes.shape({
-    card: card.isRequired,
-  }))
+  card: PropTypes.shape({
+    card: card
+  })
 }
 
 export default IngredientCard;

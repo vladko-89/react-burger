@@ -14,7 +14,7 @@ function HeaderButton({component: Component, text, active, onSetCurrent}) {
 }
 
 HeaderButton.propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   active: PropTypes.string.isRequired,
   onSetCurrent: PropTypes.func.isRequired

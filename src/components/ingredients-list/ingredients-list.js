@@ -23,7 +23,7 @@ const IngredientsList = ({title, cards}) => {
 IngredientsList.propTypes = {
   title: PropTypes.string.isRequired,
   cards: PropTypes.arrayOf(PropTypes.shape({
-    card: card.isRequired,
+    card: card
   }))
 }
 
