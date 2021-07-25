@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container__attributes {
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.title {
+  align-self: flex-start;
+}
+
+.value {
+  text-align: center;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './header-button.module.css';
+import styles from './HeaderButton.module.css';
 
 function HeaderButton({component: Component, text, active, onSetCurrent}) {
   return (

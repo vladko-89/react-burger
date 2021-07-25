@@ -7,3 +7,15 @@ export function uuid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
+
+export const getResponse = (res) => {
+  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+}
+
+export function getStringOrder(num) {
+  let str = String(num);
+  for (let i = 1; str.length < 6; i++) {
+    str = "0" + str;
+  }
+  return str;
+}
