@@ -21,7 +21,7 @@ const Tabs = () => {
         Начинки
       </Tab>
     </div>
-  )
+  );
 }
 
 export default Tabs;
