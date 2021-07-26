@@ -2,7 +2,7 @@ import React from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import ModalOverlay from '../ModalOverlay/ModalOverlay';
+import Modal from '../Modal/Modal';
 import api from '../../utils/api';
 import styles from './App.module.css';
 
@@ -54,7 +54,7 @@ function App() {
         />
         </div>
       </main>
-      <ModalOverlay
+      <Modal
         card={currentCard}
         counter={counterOrders}
         isOpened={modalIsOpened}
