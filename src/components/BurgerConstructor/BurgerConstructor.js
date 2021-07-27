@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredients } from '../../utils/data';
 import { uuid } from '../../utils/utils';
-import styles from './burger-constructor.module.css';
+import styles from './BurgerConstructor.module.css';
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({onClick}) => {
   const [totalCoast, setTotalCoast] = React.useState(0);
+
 
   const calculateTotalCoast = () => {
     const coast = ingredients.reduce((acc, item) => acc += item.price, 0);
@@ -69,12 +71,16 @@ const BurgerConstructor = () => {
           <p className="text text_type_digits-medium">{totalCoast}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={onClick}>
           Оформить заказ
         </Button>
       </div>
     </section>
   )
+}
+
+BurgerConstructor.propTypes = {
+  onClick: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './tabs.module.css';
+import styles from './Tabs.module.css';
 
 const Tabs = () => {
   const [current, setCurrent] = React.useState('breads');
@@ -21,7 +21,7 @@ const Tabs = () => {
         Начинки
       </Tab>
     </div>
-  )
+  );
 }
 
 export default Tabs;

@@ -1,0 +1,15 @@
+.preloader {
+  padding: 80px 0px;
+}
+
+.preloader__circle {
+  display: block;
+  margin: 0 auto;
+  animation: spin 1.25s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

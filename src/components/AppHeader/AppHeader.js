@@ -1,7 +1,7 @@
 import React from 'react';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import HeaderButton from '../header-button/header-button';
-import styles from './app-header.module.css';
+import HeaderButton from '../HeaderButton/HeaderButton';
+import styles from './AppHeader.module.css';
 
 function AppHeader() {
   const [current, setCurrent] = React.useState('Конструктор')

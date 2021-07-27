@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components';
 import { card } from '../../utils/data';
-import styles from './ingredient-card.module.css';
+import styles from './IngredientCard.module.css';
 
-const IngredientCard = ({card}) => {
+const IngredientCard = ({card, onClick}) => {
+
+
   return (
-    <article className={`${styles.card}`}>
+    <article className={`${styles.card}`} onClick={() => onClick(card)}>
       <Counter count={1} size="default" />
       <img src={card.image} className={`${styles.card__image}`} alt={card.name} />
       <div className={`${styles["card__price-wrapper"]} mt-1 mb-1`}>
@@ -19,7 +21,8 @@ const IngredientCard = ({card}) => {
 }
 
 IngredientCard.propTypes = {
-  card: card.isRequired
+  card: card.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default IngredientCard;
