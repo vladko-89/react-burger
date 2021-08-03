@@ -2,37 +2,51 @@ import React from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import Modal from '../Modal/Modal';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import OrderDetails from '../OrderDetails/OrderDetails';
+import { IngredientsContext } from '../../context/ingredientsContext';
+
 import api from '../../utils/api';
 import styles from './App.module.css';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
+  
   const [currentCard, setCurrentCard] = React.useState(null);
-  const [modalIsOpened, setModalIsOpened] = React.useState(false);
+  const [modalIngredientsDetailsIsOpened, setModalIngredientsDetailsIsOpened] = React.useState(false);
+  const [modalOrderDetailsIsOpened, setModalOrderDetailsIsOpened] = React.useState(false);
   const [counterOrders, setCounterOrders] = React.useState(0);
 
   const handleClickOnCard = (obj) => {
     setCurrentCard(obj);
-    setModalIsOpened(true);
-  }
-
-  const handleClickOnButton = () => {
-    setCurrentCard(null);
-    setCounterOrders(counterOrders + 1);
-    setModalIsOpened(true);
+    setModalIngredientsDetailsIsOpened(true);
   }
 
   const handleCloseModal = () => {
-    setModalIsOpened(false);
+    setModalOrderDetailsIsOpened(false);
+    setModalIngredientsDetailsIsOpened(false);
   }
 
-
-
-  const getIngredients = () => {
+    const getIngredients = () => {
     api.getIngredients()
     .then(res => setIngredients(res.data))
     .catch(error => console.log(error));
+  }
+
+  const arrangeOrder = (data) => {
+    console.log(data)
+    api.createOrder(data)
+
+    .then((res) => setCounterOrders(res.order.number))
+    .then(() => {
+      setCurrentCard(null);
+      setModalOrderDetailsIsOpened(true);
+    })
+    .catch(error => console.log(error));
+  }
+
+  const handleClickOnButton = (data) => {
+    arrangeOrder(data);
   }
 
   React.useEffect(() => {
@@ -49,15 +63,21 @@ function App() {
           ingredients={ingredients}
           onClick={handleClickOnCard}
         />
-        <BurgerConstructor
-          onClick={handleClickOnButton}
-        />
+        <IngredientsContext.Provider value={ingredients}>
+          <BurgerConstructor
+            onClick={handleClickOnButton}
+          />
+        </IngredientsContext.Provider>
         </div>
       </main>
-      <Modal
+      <IngredientDetails
         card={currentCard}
+        isOpened={modalIngredientsDetailsIsOpened}
+        onClose={handleCloseModal}
+      />
+      <OrderDetails
         counter={counterOrders}
-        isOpened={modalIsOpened}
+        isOpened={modalOrderDetailsIsOpened}
         onClose={handleCloseModal}
       />
     </div>
