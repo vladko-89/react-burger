@@ -54,33 +54,33 @@ function App() {
   }, [])
 
   return (
-    <div className={`${styles.app}`}>
-      <AppHeader />
-      <main className={`${styles.main} pb-13`}>
-        <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-        <div className={`${styles.main__container}`}>
-        <BurgerIngredients
-          ingredients={ingredients}
-          onClick={handleClickOnCard}
+    <IngredientsContext.Provider value={ingredients}>
+      <div className={`${styles.app}`}>
+        <AppHeader />
+        <main className={`${styles.main} pb-13`}>
+          <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+          <div className={`${styles.main__container}`}>
+          <BurgerIngredients
+            onClick={handleClickOnCard}
+          />      
+            <BurgerConstructor
+              onClick={handleClickOnButton}
+            />
+          </div>
+        </main>
+        <IngredientDetails
+          card={currentCard}
+          isOpened={modalIngredientsDetailsIsOpened}
+          onClose={handleCloseModal}
         />
-        <IngredientsContext.Provider value={ingredients}>
-          <BurgerConstructor
-            onClick={handleClickOnButton}
-          />
-        </IngredientsContext.Provider>
-        </div>
-      </main>
-      <IngredientDetails
-        card={currentCard}
-        isOpened={modalIngredientsDetailsIsOpened}
-        onClose={handleCloseModal}
-      />
-      <OrderDetails
-        counter={counterOrders}
-        isOpened={modalOrderDetailsIsOpened}
-        onClose={handleCloseModal}
-      />
+        <OrderDetails
+          counter={counterOrders}
+          isOpened={modalOrderDetailsIsOpened}
+          onClose={handleCloseModal}
+        />
     </div>
+    </IngredientsContext.Provider>
+    
   );
 }
 
