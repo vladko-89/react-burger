@@ -1,10 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { card } from '../../utils/data';
 import Modal from '../Modal/Modal';
 import PropTypes from 'prop-types';
 import styles from '../IngredientDetails/IngredientDetails.module.css';
 
-const IngredientDetails = ({card, isOpened, onClose}) => {
+const IngredientDetails = ({isOpened, onClose}) => {
+
+  const { card } = useSelector(store => ({
+    card: store.currentIngredient
+  }));
+
   if (card !== null) {
     return (
       <Modal isOpened={isOpened} onClose={onClose}>

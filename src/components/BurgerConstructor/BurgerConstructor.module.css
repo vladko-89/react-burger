@@ -1,8 +1,11 @@
 .ingredients {
   margin-left: 0;
   margin-top: 0;
+  min-width: 600px;
+  min-height: 600px;
   
   list-style: none;
+  border: 1px, solid, transparent;
 }
 
 .fillings {
