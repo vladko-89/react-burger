@@ -9,9 +9,12 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { getIngredients } from '../../systems/actions/index';
+import { CLEAR_ORDER, CLEAR_CONSTRUCTOR } from '../../systems/actions/index';
 import styles from './App.module.css';
 
 function App() {
+  const [modalOrder, setModalOrder] = React.useState(false);
+  const dispatch = useDispatch();
   
   const [modalIngredientsDetailsIsOpened, setModalIngredientsDetailsIsOpened] = React.useState(false);
   const [modalOrderDetailsIsOpened, setModalOrderDetailsIsOpened] = React.useState(false);
@@ -23,18 +26,19 @@ function App() {
   const handleCloseModal = () => {
     setModalOrderDetailsIsOpened(false);
     setModalIngredientsDetailsIsOpened(false);
+    if (modalOrder) {
+      dispatch({type: CLEAR_ORDER});
+      dispatch({type: CLEAR_CONSTRUCTOR});
+      setModalOrder(false);
+    }
   }
 
 
   const handleClickOnButton = () => {
+    setModalOrder(true);
     setModalOrderDetailsIsOpened(true);
   }
 
-  React.useEffect(() => {
-    getIngredients();
-  }, [])
-
-  const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(getIngredients());
@@ -57,10 +61,12 @@ function App() {
           </main>
         </DndProvider>
         <IngredientDetails
+          modalOrder={modalOrder}
           isOpened={modalIngredientsDetailsIsOpened}
           onClose={handleCloseModal}
         />
         <OrderDetails
+          modalOrder={modalOrder}
           isOpened={modalOrderDetailsIsOpened}
           onClose={handleCloseModal}
         />

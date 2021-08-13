@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { card } from '../../utils/data';
 import Modal from '../Modal/Modal';
 import PropTypes from 'prop-types';
 import styles from '../IngredientDetails/IngredientDetails.module.css';
@@ -45,7 +44,6 @@ const IngredientDetails = ({isOpened, onClose}) => {
 }
 
 IngredientDetails.propTypes = {
-  card: card,
   isOpened: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
 }
