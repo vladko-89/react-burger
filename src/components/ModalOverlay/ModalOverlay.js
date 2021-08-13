@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ModalOverlay.module.css';
 
-
 const ModalOverlay = ({isOpened, onClose, children }) => {
+
   
   const handleOverlayClose = (event) => {
     if (event.target === event.currentTarget && isOpened) {

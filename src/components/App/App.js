@@ -1,86 +1,76 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { useDispatch } from 'react-redux';
+
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { IngredientsContext } from '../../context/ingredientsContext';
-
-import api from '../../utils/api';
+import { getIngredients } from '../../systems/actions/index';
+import { CLEAR_ORDER, CLEAR_CONSTRUCTOR } from '../../systems/actions/index';
 import styles from './App.module.css';
 
 function App() {
-  const [ingredients, setIngredients] = React.useState([]);
+  const [modalOrder, setModalOrder] = React.useState(false);
+  const dispatch = useDispatch();
   
-  const [currentCard, setCurrentCard] = React.useState(null);
   const [modalIngredientsDetailsIsOpened, setModalIngredientsDetailsIsOpened] = React.useState(false);
   const [modalOrderDetailsIsOpened, setModalOrderDetailsIsOpened] = React.useState(false);
-  const [counterOrders, setCounterOrders] = React.useState(0);
 
-  const handleClickOnCard = (obj) => {
-    setCurrentCard(obj);
+  const handleClickOnCard = () => {
     setModalIngredientsDetailsIsOpened(true);
   }
 
   const handleCloseModal = () => {
     setModalOrderDetailsIsOpened(false);
     setModalIngredientsDetailsIsOpened(false);
+    if (modalOrder) {
+      dispatch({type: CLEAR_ORDER});
+      dispatch({type: CLEAR_CONSTRUCTOR});
+      setModalOrder(false);
+    }
   }
 
-    const getIngredients = () => {
-    api.getIngredients()
-    .then(res => setIngredients(res.data))
-    .catch(error => console.log(error));
+
+  const handleClickOnButton = () => {
+    setModalOrder(true);
+    setModalOrderDetailsIsOpened(true);
   }
 
-  const arrangeOrder = (data) => {
-    console.log(data)
-    api.createOrder(data)
-
-    .then((res) => setCounterOrders(res.order.number))
-    .then(() => {
-      setCurrentCard(null);
-      setModalOrderDetailsIsOpened(true);
-    })
-    .catch(error => console.log(error));
-  }
-
-  const handleClickOnButton = (data) => {
-    arrangeOrder(data);
-  }
-
-  React.useEffect(() => {
-    getIngredients();
-  }, [])
+  
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch])
 
   return (
-    <IngredientsContext.Provider value={ingredients}>
       <div className={`${styles.app}`}>
         <AppHeader />
-        <main className={`${styles.main} pb-13`}>
-          <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-          <div className={`${styles.main__container}`}>
-          <BurgerIngredients
-            onClick={handleClickOnCard}
-          />      
-            <BurgerConstructor
-              onClick={handleClickOnButton}
-            />
-          </div>
-        </main>
+        <DndProvider backend={HTML5Backend}>
+          <main className={`${styles.main} pb-13`}>
+            <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+            <div className={`${styles.main__container}`}>
+            <BurgerIngredients
+              onClick={handleClickOnCard}
+            />      
+              <BurgerConstructor
+                onClick={handleClickOnButton}
+              />
+            </div>
+          </main>
+        </DndProvider>
         <IngredientDetails
-          card={currentCard}
+          modalOrder={modalOrder}
           isOpened={modalIngredientsDetailsIsOpened}
           onClose={handleCloseModal}
         />
         <OrderDetails
-          counter={counterOrders}
+          modalOrder={modalOrder}
           isOpened={modalOrderDetailsIsOpened}
           onClose={handleCloseModal}
         />
     </div>
-    </IngredientsContext.Provider>
-    
   );
 }
 

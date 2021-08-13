@@ -19,3 +19,7 @@
 .ingredients__groups::-webkit-scrollbar-thumb {
   background-color: #8585ad;
 }
+
+.constructor__error {
+  color: red;
+}

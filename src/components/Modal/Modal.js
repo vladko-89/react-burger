@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
-import ModalOverlay from '../ModalOverlay/ModalOverlay'
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
+
 
 const modalRoot = document.getElementById('modal-root');
 
-const Modal = ({isOpened, children, onClose }) => {
+const Modal = ({isOpened, children, onClose, modalOrder=false }) => {
 
   React.useEffect(() => {
     if (!isOpened) return;
@@ -35,6 +36,7 @@ const Modal = ({isOpened, children, onClose }) => {
 }
 
 Modal.propTypes = {
+  modalOrder: PropTypes.bool,
   isOpened: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired
