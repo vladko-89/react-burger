@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { card } from '../../utils/data';
 import styles from './Modal.module.css';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import OrderDetails from '../OrderDetails/OrderDetails';
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
 
 const modalRoot = document.getElementById('modal-root');
 
-const Modal = ({isOpened, card = null, counter, onClose }) => {
+const Modal = ({isOpened, children, onClose }) => {
 
   React.useEffect(() => {
     if (!isOpened) return;
@@ -31,13 +28,7 @@ const Modal = ({isOpened, card = null, counter, onClose }) => {
     >
       <div className={`${styles['modal-body']}`}>
         <button type="button" onClick={onClose} className={`${styles.close}`} />
-        {
-          card === null
-          ?
-            <OrderDetails counter={counter} />
-          :
-            <IngredientDetails card={card} />
-        }
+        {children}
       </div>
     </ModalOverlay>, modalRoot
   )
@@ -45,9 +36,9 @@ const Modal = ({isOpened, card = null, counter, onClose }) => {
 
 Modal.propTypes = {
   isOpened: PropTypes.bool.isRequired,
-  counter: PropTypes.number.isRequired,
-  onClose: PropTypes.func.isRequired,
-  card: card
+  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired
+
 }
 
 export default Modal;

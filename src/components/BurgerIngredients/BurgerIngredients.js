@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from "./BurgerIngredients.module.css";
-import { card } from '../../utils/data';
 import Tabs from '../Tabs/Tabs';
 import IngredientsList from '../IngredientsList/IngredientsList';
+import { IngredientsContext } from '../../context/ingredientsContext';
 
-function BurgerIngredients({ ingredients, onClick }) {
-  const buns = ingredients.filter(item => item.type === "bun");
-  const sauces = ingredients.filter(item => item.type === "sauce");
-  const fillings = ingredients.filter(item => item.type === "main");
+function BurgerIngredients({ onClick }) {
+
+  const ingredientsConstructor = React.useContext(IngredientsContext);
+  const buns = ingredientsConstructor.filter(item => item.type === "bun");
+  const sauces = ingredientsConstructor.filter(item => item.type === "sauce");
+  const fillings = ingredientsConstructor.filter(item => item.type === "main");
   return (
     <section className={`${styles.ingredients} mr-10`}>
       <Tabs />
@@ -40,7 +42,6 @@ function BurgerIngredients({ ingredients, onClick }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(card).isRequired,
   onClick: PropTypes.func.isRequired
 }
 
