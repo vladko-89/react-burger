@@ -12,7 +12,7 @@ import styles from './ResetPassword.module.css'
 const ResetPassword = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const {values, handleChange, errors, isValid} = useFormWithValidation();
+    const {values, handleChange, isValid} = useFormWithValidation();
 
     function submitForm(e) {
         e.preventDefault();

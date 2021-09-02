@@ -12,7 +12,7 @@ const FormEditProfile = () => {
         user: store.user.userData
     }))
 const dispatch = useDispatch();
-    const {values, handleChange, errors, isValid, setValues} = useFormWithValidation();
+    const {values, handleChange, isValid, setValues} = useFormWithValidation();
 
     function submitForm(e) {
         e.preventDefault();

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, useLocation} from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { Counter, CurrencyIcon  } from '@ya.praktikum/react-developer-burger-ui-components';

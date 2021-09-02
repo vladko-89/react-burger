@@ -23,7 +23,7 @@ const Register = () => {
     }, [history, user])
 
     
-    const {values, handleChange, errors, isValid} = useFormWithValidation();
+    const {values, handleChange} = useFormWithValidation();
     function submitRegisterForm(e) {
         e.preventDefault();
         dispatch(registration(values));

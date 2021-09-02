@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styles from './NavBar.module.css';

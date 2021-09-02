@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Switch, Route, useLocation, useParams, useHistory} from 'react-router-dom';
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
-import { CLEAR_ORDER, CLEAR_CONSTRUCTOR, getIngredients } from '../../systems/actions/index';
+import { CLEAR_ORDER, CLEAR_CONSTRUCTOR } from '../../systems/actions/index';
 import IngredientDetails from '../../components/IngredientDetails/IngredientDetails';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import ProfilePage from '../../pages/Profile/Profile'

@@ -9,7 +9,7 @@ import styles from './Login.module.css'
 import {useFormWithValidation} from '../../hooks/useForm';
 
 const Login = () => {
-    const {values, handleChange, errors, isValid} = useFormWithValidation();
+    const {values, handleChange, errors} = useFormWithValidation();
     const dispatch = useDispatch();
     function submitRegisterForm(e) {
         e.preventDefault();

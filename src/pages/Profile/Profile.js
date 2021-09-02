@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import NavBar from '../../components/NavBar/NavBar'
 import FormEditProfile from '../../components/FormEditProfile/FormEditProfile';
 import { PageNotFound } from '../index'

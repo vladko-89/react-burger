@@ -12,7 +12,7 @@ import styles from './ForgotPassword.module.css'
 const ForgotPassword = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const {values, handleChange, errors, isValid} = useFormWithValidation();
+    const {values, handleChange, isValid} = useFormWithValidation();
 
     function submitForm(e) {
         e.preventDefault();
