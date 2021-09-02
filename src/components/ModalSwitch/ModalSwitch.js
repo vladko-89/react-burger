@@ -51,12 +51,10 @@ const ModalSwitch = () => {
                 <Route path={`/ingredients/:id`}>
                     <IngredientView />
                 </Route>
-                <Route path="/forgot-password" exact>
-                    <ForgotPassword />
-                </Route>
 
                 <ProtectedRoute component={Login} path="/login" />
                 <ProtectedRoute path="/profile" component={ProfilePage} />
+                <ProtectedRoute path="/forgot-password" component={ForgotPassword} />
                 <ProtectedRoute path="/reset-password" component={ResetPassword} />
                 <ProtectedRoute component={Register} path="/register" />
                 <Route>

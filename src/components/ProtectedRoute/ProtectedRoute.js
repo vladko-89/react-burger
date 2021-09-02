@@ -29,6 +29,10 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
                     (
                         () => reset ? <Component {...props} /> : <Redirect to="/forgot-password" />
                     )
+                : props.path === '/forgot-password' ? 
+                    (
+                        () => !user ? <Component {...props} /> : <Redirect to="/" />
+                    )
                 :
                     (
                         () => localStorage.getItem('token') ? <Component {...props} /> : <Redirect to="/login" />
