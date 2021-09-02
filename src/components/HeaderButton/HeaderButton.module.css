@@ -1,5 +1,7 @@
 .button {
   display: flex;
+  text-decoration: none;
+  color: var(--text-primary-color);
 }
 
 .button:hover {

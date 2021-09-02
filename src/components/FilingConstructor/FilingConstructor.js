@@ -24,7 +24,6 @@ const  FilingConstructor = ({id, index, moveCard, item}) => {
             if (!ref.current) {
                 return;
             }
-            console.log(item)
             const dragIndex = item.index;
             const hoverIndex = index;
             if (dragIndex === hoverIndex) {

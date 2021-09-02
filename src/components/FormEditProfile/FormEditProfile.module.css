@@ -1,0 +1,16 @@
+.inputs {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    list-style: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;   
+}
+
+.button {
+    align-self: center;
+}

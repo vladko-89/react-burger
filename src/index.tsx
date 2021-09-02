@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
 
 import { compose, createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './systems/reducers/index';
@@ -21,7 +22,9 @@ const store = createStore(rootReducer, enhancer);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter basename="/react-burger">
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
