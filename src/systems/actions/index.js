@@ -1,5 +1,5 @@
 import api from '../../utils/api';
-import {SET_USERS_DATA_SUCCESS, USER_REQUEST, REQUEST_PASSWORD_RESET, USER_FAILED, CLEAR_USER_STORE, USER_REQUEST_CLEAN} from './userActions';
+import {SET_USERS_DATA_SUCCESS, USER_REQUEST, REQUEST_PASSWORD_RESET, USER_FAILED, ERROR_401, CLEAR_USER_STORE, USER_REQUEST_CLEAN} from './userActions';
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -112,6 +112,10 @@ export function login(data) {
     if (data) {
       api.login(data)
       .then((res) => {
+        console.log(res)
+        if (res.message === "email or password are incorrect") {
+          dispatch({type: ERROR_401})
+        }
         if (res.accessToken && res.refreshToken) {
           localStorage.setItem('refresh', res.refreshToken);
           localStorage.setItem('token', res.accessToken);
@@ -122,7 +126,11 @@ export function login(data) {
         });
 
       })
-      .catch((res) => dispatch({type: USER_FAILED, status: res.status}))
+      .catch((res) => {
+        console.log(res);
+        dispatch({type: USER_FAILED});
+        
+      })
     }
   }
 }
@@ -171,6 +179,7 @@ export {
   CLEAR_USER_STORE,
   REQUEST_PASSWORD_RESET,
   USER_REQUEST_CLEAN,
+  ERROR_401,
 
   ADD_INGREDIENT_TO_CONSTRUCTOR,
   DELETE_INGREDIENT_FROM_CONSTRUCTOR,

@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useFormWithValidation} from '../../hooks/useForm';
 import api from '../../utils/api';
-import {SET_USERS_DATA_SUCCESS} from '../../systems/actions'
+import { refreshToken } from '../../systems/actions'
 import styles from './FormEditProfile.module.css';
 
 
@@ -17,10 +17,19 @@ const dispatch = useDispatch();
     function submitForm(e) {
         e.preventDefault();
         api.editUserInfo(values)
-            .then((res) => {
-                dispatch({type: SET_USERS_DATA_SUCCESS, data: res.user});
+            .then(() => {
+                dispatch(refreshToken());
+                
             })
             .catch((err) => console.log(err))
+    }
+
+    function resetForm() {
+        setValues({
+            name: user.name,
+            email: user.email,
+            password: '***'
+        })
     }
 
     useEffect(() => {
@@ -71,7 +80,14 @@ const dispatch = useDispatch();
                         />
                     </li>
                 </ul>
-                { isValid && <Button className={styles.button} type="primary" size="large">Сохранить</Button>}
+                { isValid
+                &&
+                
+                    <div className={`${styles.buttons}`}>
+                        <button className={`${styles.reset} text text_type_main-small pr-3 pl-7`} type='button' onClick={resetForm}>Отменить</button>
+                        <Button className={styles.button} type="primary" size="large">Сохранить</Button>
+                    </div>
+                }
             </form>
         </>
     )

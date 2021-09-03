@@ -19,7 +19,7 @@ const ResetPassword = () => {
         if (isValid) {
             api.reset(values).then(() => {
                 dispatch({type: REQUEST_PASSWORD_RESET});
-                history.push('/')
+                history.push('/login')
             })
             .catch((err) => console.log(err));
         }
