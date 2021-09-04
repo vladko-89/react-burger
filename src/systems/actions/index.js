@@ -135,10 +135,10 @@ export function login(data) {
   }
 }
 
-export const refreshToken = () => {
+export const refreshToken = (callback) => {
   return function(dispatch) {
     const token = localStorage.getItem('refresh');
-    api.updateTokens(token).then(() => dispatch(getUserInfo()))
+    api.updateTokens(token).then(() => dispatch(callback))
   }
 }
 
@@ -158,7 +158,31 @@ export function getUserInfo() {
     .catch((res) => {
       if (res.message === 'jwt expired') {
         console.log(res)
-        dispatch(refreshToken())
+        dispatch(refreshToken(getUserInfo()))
+      }  
+    })
+  }
+}
+
+export function updateUserInfo(data) {
+  return function(dispatch) {
+    dispatch({
+      type: USER_REQUEST
+    });
+    api.editUserInfo(data)
+    .then((res) => {
+      if (!res.success) throw res;
+      else {dispatch({
+        type:SET_USERS_DATA_SUCCESS,
+        data: res.user
+      });}
+    })
+    .catch((res) => {
+      dispatch({type: USER_FAILED});
+      console.log(res)
+      if (res.message === 'jwt expired') {
+        console.log(res)
+        dispatch(refreshToken(updateUserInfo(data)))
       }  
     })
   }

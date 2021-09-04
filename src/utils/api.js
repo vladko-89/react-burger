@@ -146,7 +146,8 @@ class Api {
         "email": data.email
       })
     })
-    .then(getResponse)
+    .then((res) => res.json())
+    .then(data => data)
   }
 }
 

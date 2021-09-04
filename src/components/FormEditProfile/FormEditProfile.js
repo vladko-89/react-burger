@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useFormWithValidation} from '../../hooks/useForm';
-import api from '../../utils/api';
-import { refreshToken } from '../../systems/actions'
+import { updateUserInfo } from '../../systems/actions'
 import styles from './FormEditProfile.module.css';
 
 
@@ -16,12 +15,7 @@ const dispatch = useDispatch();
 
     function submitForm(e) {
         e.preventDefault();
-        api.editUserInfo(values)
-            .then(() => {
-                dispatch(refreshToken());
-                
-            })
-            .catch((err) => console.log(err))
+        dispatch(updateUserInfo(values))
     }
 
     function resetForm() {
