@@ -1,3 +1,5 @@
+
+
 .card {
   position: relative;
 
@@ -7,5 +9,5 @@
 }
 
 .card__price-wrapper {
-  display: flex;
+  display: flex;  
 }

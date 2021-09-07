@@ -1,0 +1,11 @@
+.link {
+    color: rgb(76, 76, 255);
+
+    opacity: 1;
+    text-decoration: none;
+    transition: opacity 1s, linear, 0.4s;
+}
+
+.link:hover {
+    opacity: 0.7
+}

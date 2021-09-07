@@ -3,9 +3,9 @@
   margin-top: 0;
   min-width: 600px;
   min-height: 600px;
-  
+  border: 2px solid #8585ad;
+  border-radius: 4px;
   list-style: none;
-  border: 1px, solid, transparent;
 }
 
 .fillings {

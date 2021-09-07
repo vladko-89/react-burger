@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import update from 'immutability-helper';
 import { useDrop } from "react-dnd";
@@ -21,11 +22,13 @@ import styles from './BurgerConstructor.module.css';
 
 const BurgerConstructor = ({ onClick }) => {
   const dispatch = useDispatch();
-  const { ingredients, ingredientsConstructor, error, coast } = useSelector(store => ({
+  const history = useHistory();
+  const { ingredients, ingredientsConstructor, error, coast, user } = useSelector(store => ({
     ingredients: store.ingredients.ingredients,
     ingredientsConstructor: store.burgerConstructor.items,
     error: store.order.orderError,
     coast: store.order.coast,
+    user: store.user.userData
   }));
 
   const [{isHover}, refTarget] = useDrop({
@@ -51,12 +54,10 @@ const BurgerConstructor = ({ onClick }) => {
     })
   });
 
-  const borderColor = isHover ? 'lightgreen' : 'transparent';
-
+  const border = isHover ? '2px solid lightgreen' : '2px solid transparent';
 
   function createId(item) {
       return  {...item, uuid: uuid()}
-    
   }
 
   const handleClickSendOrder = () => {
@@ -71,12 +72,11 @@ const BurgerConstructor = ({ onClick }) => {
     } else {
       dispatch({type: POST_ORDER_ERROR})
     }
-    
   }
 
   useEffect(() => {
     dispatch({type: CALCULATE_COAST, items: ingredientsConstructor})
-  }, [ingredientsConstructor])
+  }, [ingredientsConstructor, dispatch])
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     const dragCard = ingredientsConstructor[dragIndex];
@@ -86,13 +86,12 @@ const BurgerConstructor = ({ onClick }) => {
             [hoverIndex, 0, dragCard],
         ],
     });
-    console.log(newData)
     dispatch({ type: SORT_INGREDIENTS_IN_CONSTRUCTOR, data: newData})
-  }, [ingredientsConstructor]);
+  }, [ingredientsConstructor, dispatch]);
 
     return (
     <section className="mt-3 mb-13">
-      <ul className={`${styles.ingredients} mb-10 pr-4 pl-4`} ref={refTarget} style={{borderColor}}>
+      <ul className={`${styles.ingredients} mb-10 pr-4 pl-4`} ref={refTarget} style={{border}}>
         <li className={`${styles.ingredient} ml-6 mb-2`}>
         {ingredientsConstructor.filter(item => item.type === 'bun').length > 0 && ingredientsConstructor.filter(item => item.type === 'bun').map((item) => (
             <ConstructorElement
@@ -127,15 +126,22 @@ const BurgerConstructor = ({ onClick }) => {
         </li>
       </ul>
       {error && <p className={`${styles.constructor__error} text text_type_main-medium`}>Чтобы сделать заказ, соберите свой бургер!</p>}
-      <div className={`${styles.constructor__wrapper} mb-13`}>
-        <div className={`${styles.constructor__wrapper} mr-10`}>
-          <p className="text text_type_digits-medium">{coast}</p>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button type="primary" size="large" onClick={handleClickSendOrder}>
-          Оформить заказ
-        </Button>
-      </div>
+        <div className={`${styles.constructor__wrapper} mb-13`}>
+          <div className={`${styles.constructor__wrapper} mr-10`}>
+            <p className="text text_type_digits-medium">{coast}</p>
+            <CurrencyIcon type="primary" />
+          </div>
+          {user
+          ?
+            <Button type="primary" size="large" onClick={handleClickSendOrder}>
+              Оформить заказ
+            </Button>
+          :
+            <Button type="primary" size="large" onClick={() => history.push('/login')}>
+              Войти
+            </Button>
+          }
+        </div> 
     </section>
   )
 }

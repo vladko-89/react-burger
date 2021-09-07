@@ -1,0 +1,32 @@
+.inputs {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    list-style: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;   
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    align-self: center;
+    transition: opacity 0.9s, linear, 0.9s;
+}
+
+.reset {
+    color: #ffffff;
+    border: none;
+    background-color: inherit;
+}
+
+.reset:hover {
+    opacity: 0.6;
+}
